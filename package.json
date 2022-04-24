@@ -15,7 +15,8 @@
     "primeicons": "^5.0.0",
     "primevue": "^3.12.5",
     "querystring": "^0.2.1",
-    "vue": "^3.2.33"
+    "vue": "^3.2.33",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@netlify/functions": "^1.0.0",

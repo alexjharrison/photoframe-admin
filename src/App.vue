@@ -3,15 +3,21 @@
     <div>homgfgdsfde</div>
     <app-header />
     <button @click="createUploadWidget">behold the widget</button>
-    <div v-for="image in images" :key="image.asset_id">
-      <img :src="image.url" width="200" @click="deleteImage(image.public_id)" />
-      <ul>
-        <li v-for="[key, value] in Object.entries(image)" :key="key">
-          <b>{{ key }}</b
-          >: {{ value }}
-        </li>
-      </ul>
+    <div v-if="!inOriginalOrder">
+      <button @click="updateMetadata">Save Current Order</button>
+      <button @click="resetOrder">Reset Order</button>
     </div>
+    <draggable
+      v-model:list="images"
+      @start="drag = true"
+      @end="drag = false"
+      item-key="public_id"
+      class="flex flex-wrap"
+    >
+      <template #item="{ element: image }">
+        <preview-box :image="image" />
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -19,11 +25,17 @@
 import { useCloudinary } from "./hooks/cloudinary";
 import AppHeader from "./components/AppHeader.vue";
 import { useStore } from "./hooks/store";
-import { onMounted } from "vue";
+import draggable from "vuedraggable";
+import PreviewBox from "./components/PreviewBox.vue";
+import { ref } from "vue";
 
 const { createUploadWidget } = useCloudinary();
-const { fetchImages, images, deleteImage, updateMetadata } = useStore();
+const { fetchImages, images, inOriginalOrder, updateMetadata, resetOrder } =
+  useStore();
+
 fetchImages();
+
+const drag = ref(false);
 </script>
 
 <style lang="scss">

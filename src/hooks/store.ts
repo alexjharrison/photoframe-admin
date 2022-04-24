@@ -5,8 +5,19 @@ import type {
   RequestResponse,
 } from "../functions/responses.types";
 import { useFetch } from "@vueuse/core";
+import { computed } from "@vue/reactivity";
 
 const images: Image[] = reactive([]);
+const originalOrder: string[] = reactive([]);
+const inOriginalOrder = computed(() =>
+  images.every((image, i) => image.asset_id === originalOrder[i])
+);
+
+const resetOrder = () =>
+  images.sort(
+    (a: Image, b: Image) => +a.context.custom.index - +b.context.custom.index
+  );
+
 const error = ref<ErrorResponse>();
 const cloudFunc = (func: string) => `/.netlify/functions/${func}`;
 
@@ -19,9 +30,14 @@ export function useStore() {
 
       if (!resources.value?.resources) return;
 
-      // resources.value = resources.value.sort((a, b) => a);
-
       images.splice(0, images.length, ...resources.value.resources);
+      resetOrder();
+
+      originalOrder.splice(
+        0,
+        originalOrder.length,
+        ...images.map((resource: Image) => resource.asset_id)
+      );
     } catch (err) {
       error.value = err as ErrorResponse;
     }
@@ -47,5 +63,13 @@ export function useStore() {
     fetchImages();
   }
 
-  return { fetchImages, deleteImage, updateMetadata, images, error };
+  return {
+    fetchImages,
+    deleteImage,
+    updateMetadata,
+    images,
+    error,
+    inOriginalOrder,
+    resetOrder,
+  };
 }
