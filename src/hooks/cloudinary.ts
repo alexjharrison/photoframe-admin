@@ -5,11 +5,13 @@ declare global {
 }
 
 import { useToast } from "primevue/usetoast";
+import { useStore } from "./store";
 
 const cloudinary = window.cloudinary;
 
 export function useCloudinary() {
   const toast = useToast();
+  const { fetchImages, images } = useStore();
 
   function createUploadWidget() {
     cloudinary.openUploadWidget(
@@ -20,13 +22,19 @@ export function useCloudinary() {
         multiple: false,
         sources: ["local", "url"],
         secure: true,
-        croppingAspectRatio: 1200 / (800 - 15),
+        croppingAspectRatio: 1280 / (800 - 15),
         showSkipCropButton: false,
         resourceType: "image",
         folder: "samsung_photoframe",
+        maxImageWidth: 1400,
+        maxImageHeight: 1000,
+        croppingValidateDimensions: true,
+        prepareUploadParams: (cb: any, params: any) => {
+          cb({ ...params, context: `index=${images.length}` });
+        },
         // inlineContainer: "#uploader",
       },
-      (error: any, result: any) => {
+      async (error: any, result: any) => {
         if (error) {
           toast.add({
             severity: "error",
@@ -44,7 +52,7 @@ export function useCloudinary() {
           detail: result,
         });
 
-        console.log("success", result);
+        fetchImages();
       }
     );
   }
