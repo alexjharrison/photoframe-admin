@@ -14,7 +14,7 @@ export function useCloudinary() {
   function createUploadWidget() {
     cloudinary.openUploadWidget(
       {
-        cloudName: "dsylo5mtz",
+        cloudName: import.meta.env.VITE_APP_CLOUD_NAME,
         uploadPreset: "jrtnyio4",
         cropping: true,
         multiple: false,
