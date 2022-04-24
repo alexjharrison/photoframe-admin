@@ -9,3 +9,9 @@ body {
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
 }
+
+.container {
+  max-width: 1400px;
+  margin: auto;
+  padding: 0 20px;
+}

@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div>homgfgdsfde</div>
     <app-header />
-    <button @click="createUploadWidget">behold the widget</button>
+    <upload-image />
+    <image-list-header />
+    <image-list-sortable />
     <div v-if="!inOriginalOrder">
       <button @click="updateMetadata">Save Current Order</button>
       <button @click="resetOrder">Reset Order</button>
@@ -22,14 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import { useCloudinary } from "./hooks/cloudinary";
 import AppHeader from "./components/AppHeader.vue";
 import { useStore } from "./hooks/store";
 import draggable from "vuedraggable";
 import PreviewBox from "./components/PreviewBox.vue";
 import { ref } from "vue";
+import UploadImage from "@/components/UploadImage.vue";
+import ImageListHeader from "@/components/ImageListHeader.vue";
+import ImageListSortable from "@/components/ImageListSortable.vue";
 
-const { createUploadWidget } = useCloudinary();
 const { fetchImages, images, inOriginalOrder, updateMetadata, resetOrder } =
   useStore();
 

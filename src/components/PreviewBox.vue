@@ -1,6 +1,6 @@
 <template>
   <div class="p-2">
-    <Image :src="image.secure_url" :alt="image.public_id" width="350" preview />
+    <Image :src="image.secure_url" :alt="image.public_id" width="200" preview />
   </div>
 </template>
 
