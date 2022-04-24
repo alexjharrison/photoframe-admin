@@ -4,7 +4,9 @@
       class="container text-xl my-6 flex-grow-1 flex flex-wrap justify-content-between"
     >
       <div>
-        <h2 class="text-5xl my-4 line-height-2">Current Photos</h2>
+        <h2 class="text-5xl my-4 line-height-2">
+          <span> Current Photos</span>
+        </h2>
         <p class="mb-3">Below are all images displayed in the photoframe</p>
         <p class="m-0">Click on a photo to preview full screen</p>
         <p class="m-0">
@@ -35,4 +37,8 @@ import { useStore } from "../hooks/store";
 const { inOriginalOrder, updateMetadata, resetOrder } = useStore();
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+h2 > span {
+  border-bottom: 1px solid var(--text-color);
+}
+</style>
