@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import type { Image as IImage } from "@/functions/responses.types";
+import type { Image as IImage } from "@/config/responses.types";
 import { useStore } from "@/hooks/store";
 import Image from "primevue/image";
 import { useConfirm } from "primevue/useconfirm";

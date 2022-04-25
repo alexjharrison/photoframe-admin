@@ -3,7 +3,7 @@ import type {
   ErrorResponse,
   Image,
   RequestResponse,
-} from "../functions/responses.types";
+} from "../config/responses.types";
 import { useFetch } from "@vueuse/core";
 import { computed } from "@vue/reactivity";
 

@@ -1,6 +1,9 @@
 import type { Handler } from "@netlify/functions";
-import type { ErrorResponse, RequestResponse } from "../responses.types";
-import { cloudinary } from "../config";
+import type {
+  ErrorResponse,
+  RequestResponse,
+} from "../../config/responses.types";
+import { cloudinary } from "../../config/config";
 
 export const handler: Handler = async (_event, _context) => {
   return cloudinary.api
