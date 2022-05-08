@@ -36,21 +36,21 @@ export function useCloudinary() {
       },
       async (error: any, result: any) => {
         if (error) {
-          toast.add({
-            severity: "error",
-            summary: "Upload failed",
-            detail: error,
-          });
+          // toast.add({
+          //   severity: "error",
+          //   summary: "Upload failed",
+          //   detail: error,
+          // });
 
           console.log(error);
           return;
         }
 
-        toast.add({
-          severity: "success",
-          summary: "Upload Succeeded",
-          detail: result,
-        });
+        // toast.add({
+        //   severity: "success",
+        //   summary: "Upload Succeeded",
+        //   detail: result,
+        // });
 
         fetchImages();
       }
