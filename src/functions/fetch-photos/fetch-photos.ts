@@ -15,6 +15,9 @@ export const handler: Handler = async (_event, _context) => {
     .then((resources: RequestResponse) => ({
       statusCode: 200,
       body: JSON.stringify(resources),
+      headers: {
+        "access-control-allow-origin": "*",
+      },
     }))
     .catch((e: ErrorResponse) => ({
       statusCode: e.error.http_code,
